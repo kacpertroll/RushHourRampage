@@ -3,43 +3,31 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    #region Player Movement
+
     public InputActionAsset InputActions;
 
     private InputAction m_moveAction;
-
     private Vector2 m_moveAmt;
     private CharacterController m_characterController;
-
     private Animator m_animator;
 
     public Transform cameraTransform;
-
     public float walkSpeed = 5f;
 
-    //private void OnEnable()
-    //{
-    //    InputActions.FindActionMap("Player").Enable();
-    //}
-
-    //private void OnDisable()
-    //{
-    //    InputActions.FindActionMap("Player").Disable();
-    //}
+    private PlayerAttack m_playerAttack;
 
     private void Awake()
     {
         m_animator = GetComponentInChildren<Animator>();
-
-        m_moveAction = InputSystem.actions.FindAction("Move");
-
+        m_moveAction = InputActions.FindActionMap("Player").FindAction("Move");
         m_characterController = GetComponent<CharacterController>();
+        m_playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Update()
     {
         m_moveAmt = m_moveAction.ReadValue<Vector2>();
-
-        Debug.Log("Player Speed: " + m_moveAmt.magnitude);
     }
 
     private void FixedUpdate()
@@ -62,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = camForward * inputDir.z + camRight * inputDir.x;
 
-        if (move.magnitude > 0.1f) // obrót kamery wzglêdem obrotu postaci
+        // obrót postaci tylko gdy nie atakuje
+        if (move.magnitude > 0.1f && (m_playerAttack == null || !m_playerAttack.IsTargetingEnemy))
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
@@ -71,9 +60,8 @@ public class PlayerMovement : MonoBehaviour
         m_characterController.SimpleMove(move * walkSpeed);
 
         m_animator.SetFloat("Speed", m_moveAmt.magnitude);
-
         m_animator.speed = move.magnitude > 0.1f ? move.magnitude : 1f;
-
     }
 
+    #endregion
 }
