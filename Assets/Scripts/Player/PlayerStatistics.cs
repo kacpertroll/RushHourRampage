@@ -8,7 +8,7 @@ public class PlayerStatistics : MonoBehaviour
     public float damage = 5f;
     public float attackCooldown = 1f;
     public float attackRange = 10f;
-    public float critChance = 0.1f;   // 10%
+    public float critChance = 0.01f;   // 10%
     public float critMultiplier = 2f; // obra¿enia krytyczne = dmg * multiplier
 
     [Header("Survival Stats")]
@@ -25,7 +25,7 @@ public class PlayerStatistics : MonoBehaviour
     public float currentLevel = 1f;
     public float expToLevelUp = 20f;
     private float finExp = 0f;
-    private float overallExp = 0f;
+    public float overallExp = 0f;
 
     [Header("UI References")]
     public Slider expBar;
@@ -85,7 +85,7 @@ public class PlayerStatistics : MonoBehaviour
     private void LevelUp()
     {
         currentLevel++;
-        expToLevelUp += 10;
+        expToLevelUp *= 1.04f;
         if (expBar != null)
             expBar.maxValue = expToLevelUp;
 

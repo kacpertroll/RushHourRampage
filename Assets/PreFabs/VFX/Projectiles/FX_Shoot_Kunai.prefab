@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5938167112633497376}
-  - component: {fileID: 5938167112633497383}
   - component: {fileID: 5143980916437850802}
   - component: {fileID: 210337647087535054}
+  - component: {fileID: -8510893810493313066}
   m_Layer: 3
   m_Name: FX_Shoot_Kunai
   m_TagString: Projectile
@@ -35,22 +35,6 @@ Transform:
   - {fileID: 4063072210885414931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5938167112633497383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938167112633497377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8b9d85d920bc042a7f4ad66be17a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
-  fireRate: 7
-  muzzlePrefab: {fileID: 9123128234531036696, guid: c2723bf6dfcf5494eb5dbbd5f5f2ba41, type: 3}
-  hitPrefab: {fileID: 506660397902956375, guid: e0b660ba7b8613848b54730e34a87cd9, type: 3}
 --- !u!65 &5143980916437850802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -99,6 +83,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &-8510893810493313066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938167112633497377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0157d2cf3af804d47848db332ee8bac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  fireRate: 7
+  muzzlePrefab: {fileID: 9123128234531036696, guid: c2723bf6dfcf5494eb5dbbd5f5f2ba41, type: 3}
+  hitPrefab: {fileID: 506660397902956375, guid: e0b660ba7b8613848b54730e34a87cd9, type: 3}
+  attackDamage: 0
 --- !u!1001 &433648897012646164
 PrefabInstance:
   m_ObjectHideFlags: 0

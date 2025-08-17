@@ -1,27 +1,33 @@
 ﻿using UnityEngine;
-using DG.Tweening;
 
 public class ExpOrb : MonoBehaviour
 {
     public float expValue = 5;
-    public float pickupRange = 3f; // dystans od gracza, kiedy orb zaczyna się przyciągać
     public float moveSpeed = 10f;
 
     private Transform player;
+    private PlayerStatistics stats;
+
     private bool isMovingToPlayer = false;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        GameObject statManager = GameObject.FindGameObjectWithTag("Stat Manager");
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+            stats = statManager.GetComponent<PlayerStatistics>();
+        }
     }
 
     private void Update()
     {
-        if (player == null) return;
+        if (player == null || stats == null) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (!isMovingToPlayer && distance <= pickupRange)
+        if (!isMovingToPlayer && distance <= stats.pickupRange)
         {
             isMovingToPlayer = true;
         }
@@ -37,12 +43,7 @@ public class ExpOrb : MonoBehaviour
             // jeśli orb dotknie gracza → dodaj exp i zniszcz się
             if (distance <= 0.5f)
             {
-                PlayerExpManager expManager = player.GetComponent<PlayerExpManager>();
-                if (expManager != null)
-                {
-                    expManager.AddExp(expValue);
-                }
-
+                stats.AddExp(expValue);
                 Destroy(gameObject);
             }
         }

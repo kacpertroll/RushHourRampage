@@ -16,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
 
     public bool IsTargetingEnemy { get; private set; } = false;
 
+    public PlayerStatistics stats;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -46,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
         {
             animator.SetBool("isAttacking", true);
             ShootProjectile();
-            attackTimer = attackCooldown;
+            attackTimer = stats.attackCooldown;
         }
     }
 
@@ -82,7 +84,7 @@ public class PlayerAttack : MonoBehaviour
     private void FindClosestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float closestDistance = attackRange;
+        float closestDistance = stats.attackRange;
         currentTarget = null;
 
         foreach (GameObject enemy in enemies)
@@ -100,7 +102,8 @@ public class PlayerAttack : MonoBehaviour
     {
         // Zasięg ataku
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        if (stats != null)
+        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
 
         // Linia do celu
         if (currentTarget != null)

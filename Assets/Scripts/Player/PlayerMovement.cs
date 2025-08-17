@@ -13,9 +13,10 @@ public class PlayerMovement : MonoBehaviour
     private Animator m_animator;
 
     public Transform cameraTransform;
-    public float walkSpeed = 5f;
 
     private PlayerAttack m_playerAttack;
+
+    public PlayerStatistics stats;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
 
-        m_characterController.SimpleMove(move * walkSpeed);
+        m_characterController.SimpleMove(move * stats.moveSpeed);
 
         m_animator.SetFloat("Speed", m_moveAmt.magnitude);
         m_animator.speed = move.magnitude > 0.1f ? move.magnitude : 1f;

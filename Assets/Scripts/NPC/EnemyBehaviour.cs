@@ -148,7 +148,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            ProjectileMove projectile = collision.gameObject.GetComponent<ProjectileMove>();
+            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
             if (projectile != null)
             {
                 TakeDamage(projectile.attackDamage, collision.transform.position);
