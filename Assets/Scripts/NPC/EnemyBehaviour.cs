@@ -90,8 +90,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         agent.isStopped = true;
         gameObject.tag = "Untagged";
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
 
-        Invoke(nameof(Die), 1f); // czekamy na animacjê
+        Invoke(nameof(Die), 0.5f); // czekamy na animacjê
     }
 
     private void Die()

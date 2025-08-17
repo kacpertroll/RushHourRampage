@@ -6,9 +6,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown = 1f;
     public float attackDamage = 5f;
 
-    //public GameObject projectileMuzzle;
     public GameObject projectilePrefab;
-    //public GameObject projectioleHit;
 
     public Transform firePoint;
 
