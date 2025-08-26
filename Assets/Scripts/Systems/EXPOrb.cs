@@ -6,6 +6,7 @@ public class ExpOrb : MonoBehaviour
     public float moveSpeed = 10f;
 
     private Transform player;
+
     private PlayerStatistics stats;
 
     private bool isMovingToPlayer = false;

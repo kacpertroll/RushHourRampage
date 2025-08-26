@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float attackRange = 10f;
-    public float attackCooldown = 1f;
-    public float attackDamage = 5f;
-
     public GameObject projectilePrefab;
 
     public Transform firePoint;
@@ -16,7 +12,16 @@ public class PlayerAttack : MonoBehaviour
 
     public bool IsTargetingEnemy { get; private set; } = false;
 
-    public PlayerStatistics stats;
+    private PlayerStatistics stats;
+
+    private void Start()
+    {
+        GameObject statManager = GameObject.FindGameObjectWithTag("Stat Manager");
+        if (statManager != null)
+        {
+            stats = statManager.GetComponent<PlayerStatistics>();
+        }
+    }
 
     private void Awake()
     {

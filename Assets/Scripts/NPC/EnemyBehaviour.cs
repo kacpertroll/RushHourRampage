@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("Economy")]
     public GameObject expOrbPrefab;
     public float expReward = 1.0f;
+    public float damage = 20f;
 
     [Header("VFX")]
     public GameObject deathEffect;
@@ -26,6 +28,7 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("Physics")]
     public float knockbackForce = 3f;
     public float knockbackDuration = 0.2f;
+
 
     private bool isKnockedback = false;
 
@@ -143,7 +146,6 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
@@ -157,4 +159,5 @@ public class EnemyBehaviour : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
 }

@@ -10,12 +10,18 @@ public class ProjectileMove : MonoBehaviour
     public GameObject hitPrefab;
 
     private GameObject Player;
-    private PlayerAttack attack;
+    private PlayerStatistics stats;
     [HideInInspector]
     public float attackDamage = 0f;
 
     void Start()
     {
+        GameObject statManager = GameObject.FindGameObjectWithTag("Stat Manager");
+        if (statManager != null)
+        {
+            stats = statManager.GetComponent<PlayerStatistics>();
+        }
+
         if (muzzlePrefab != null)
         {
             var muzzleVFX = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
@@ -33,8 +39,7 @@ public class ProjectileMove : MonoBehaviour
         }
 
         Player = GameObject.FindGameObjectWithTag("Player");
-        attack = Player.GetComponent<PlayerAttack>();
-        attackDamage = attack.attackDamage;
+        attackDamage = stats.damage;
     }
 
     void Update()

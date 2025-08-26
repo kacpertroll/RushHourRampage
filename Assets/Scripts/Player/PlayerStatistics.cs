@@ -15,6 +15,7 @@ public class PlayerStatistics : MonoBehaviour
     public float maxHP = 100f;
     public float currentHP = 100f;
     public float hpRegen = 0f;
+    public float immunityTime = 1f;
 
     [Header("Utility Stats")]
     public float moveSpeed = 5f;
@@ -66,7 +67,7 @@ public class PlayerStatistics : MonoBehaviour
                 () => currentExp,
                 x => { currentExp = x; expBar.value = currentExp; },
                 finExp,
-                0.5f
+                0.2f
             )
             .SetEase(Ease.OutQuad)
             .SetId("ExpTween")

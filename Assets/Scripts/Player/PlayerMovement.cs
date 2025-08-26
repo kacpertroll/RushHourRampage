@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerAttack m_playerAttack;
 
-    public PlayerStatistics stats;
+    private PlayerStatistics stats;
 
     private void Awake()
     {
@@ -24,6 +24,15 @@ public class PlayerMovement : MonoBehaviour
         m_moveAction = InputActions.FindActionMap("Player").FindAction("Move");
         m_characterController = GetComponent<CharacterController>();
         m_playerAttack = GetComponent<PlayerAttack>();
+    }
+
+    private void Start()
+    {
+        GameObject statManager = GameObject.FindGameObjectWithTag("Stat Manager");
+        if (statManager != null)
+        {
+            stats = statManager.GetComponent<PlayerStatistics>();
+        }
     }
 
     private void Update()
